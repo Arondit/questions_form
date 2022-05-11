@@ -45,6 +45,12 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
     return User(username=user['node']['username'])
 
 
+@app.get('/')
+def main_page():
+    """Главная страница"""
+    return {'status': 'В разработке'}
+
+
 @app.post('/register/', name='Регистрация')
 def register(body: UserWithPassword):
     """Создание пользователя с указанными логином и паролем."""
