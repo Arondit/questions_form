@@ -45,12 +45,6 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
     return User(username=user['node']['username'])
 
 
-@app.get('/', name='Документация')
-def main_page():
-    """Главная страница, перенаправляет на документацию"""
-    return RedirectResponse('/docs')
-
-
 @app.post('/register/', name='Регистрация')
 def register(body: UserWithPassword):
     """Создание пользователя с указанными логином и паролем."""
