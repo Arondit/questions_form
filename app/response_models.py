@@ -14,9 +14,10 @@ class Question(BaseModel):
     correct_answer: Optional[str] = None
 
     def __init__(__pydantic_self__, **data) -> None:
-        variants: str = data['variants']
-        variants = variants[1:-1].split(', ')
-        data['variants'] = [v[1:-1] for v in variants]
+        if 'variants' in data:
+            variants: str = data['variants']
+            variants = variants[1:-1].split(', ')
+            data['variants'] = [v[1:-1] for v in variants]
         super().__init__(**data)
 
 
@@ -26,7 +27,6 @@ class QuestionForm(BaseModel):
     theme: str
     code: str
     datetime_created: datetime
-    is_quiz: Optional[bool] = None
     questions: List[Question] = []
 
 
